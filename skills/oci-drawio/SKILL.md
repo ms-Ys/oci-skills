@@ -1,26 +1,30 @@
 ---
 name: oci-drawio
-description: Generate and edit OCI architecture diagrams in draw.io (.drawio) format. Use this skill when asked to create, update, or modify OCI architecture diagrams.
+description: Generate and edit draw.io architecture diagrams using official OCI icons, and also support AWS resource diagrams with the official AWS icon package. Use this skill when asked to create, update, or modify OCI or AWS infrastructure diagrams.
 ---
 
 # OCI draw.io Diagram Skill
 
-Generate and edit Oracle Cloud Infrastructure (OCI) architecture diagrams in draw.io (.drawio) format.
+Generate and edit Oracle Cloud Infrastructure (OCI) architecture diagrams in draw.io (.drawio) format, with AWS icon support for AWS-native or mixed-cloud diagrams.
 
 ## Prerequisites
 
-Run `setup.sh` once before first use to download official OCI icons and generate the draw.io shape library:
+Run `setup.sh` before first use to download official icon packages and generate draw.io shape libraries:
 
 ```bash
 cd <skill-directory>/skills/oci-drawio
-bash setup.sh
+bash setup.sh --provider all
 ```
 
 This generates:
 - `icons/oci-shapes.xml` — draw.io custom shape library (for GUI drag-and-drop)
+- `icons/aws-shapes.xml` — AWS draw.io custom shape library
 - `components/oci_components.json` — full component dictionary (1.5MB, for backward compatibility)
+- `components/aws_components.json` — AWS full component dictionary
 - `components/index.json` — lightweight name→category index (~5KB)
 - `components/{category}.json` — per-category component files (50-300KB each)
+- `components/aws/index.json` — lightweight AWS name→category index
+- `components/aws/{category}.json` — per-category AWS component files
 
 ## How to Use This Skill
 
@@ -32,12 +36,22 @@ When asked to create or edit an OCI architecture diagram:
 4. Generate `.drawio` XML following the structure and rules below
 5. Save the output as a `.drawio` file
 
+When asked to create or edit an AWS architecture diagram:
+
+1. Read [references/aws.md](references/aws.md)
+2. Read `components/aws/index.json` to identify needed categories
+3. Read only the relevant AWS category files under `components/aws/`
+4. Extract the `style` strings for the specific components needed
+5. Generate `.drawio` XML following the same XML rules in this skill
+
 When editing an existing `.drawio` file:
 
 1. Read the existing file as XML
 2. Parse the `<mxCell>` elements to understand the current diagram
 3. Add, modify, or remove `<mxCell>` elements as needed
 4. Write the modified XML back to the file
+
+For AWS-specific layout conventions and asset paths, read [references/aws.md](references/aws.md). Use the OCI-specific layout rules below only for OCI diagrams.
 
 ---
 
@@ -211,7 +225,7 @@ To minimize context usage, load components in two stages instead of reading the 
 
 ### Stage 1: Read the index
 
-Read `components/index.json` — a lightweight (~5KB) mapping of component name → category:
+For OCI, read `components/index.json` — a lightweight (~5KB) mapping of component name → category:
 
 ```json
 {
@@ -259,6 +273,8 @@ for cat in ["networking", "compute", "database"]:
 ### Fallback: Full dictionary
 
 `components/oci_components.json` (1.5MB) is still available for backward compatibility. Use it only when you need to search across all categories at once
+
+For AWS, use `components/aws/index.json`, `components/aws/{category}.json`, and `components/aws_components.json`. Do not mix OCI and AWS dictionaries unless the user explicitly wants a mixed-cloud diagram.
 
 ---
 
@@ -423,6 +439,7 @@ the encoding from the content.
 - Save files with `.drawio` extension
 - The file can be opened directly in [draw.io desktop](https://github.com/jgraph/drawio-desktop) or [draw.io web](https://app.diagrams.net/)
 - Default save location: current working directory, or as specified by the user
+- AWS starter template: `templates/base_aws_diagram.drawio`
 
 ### 設計ポイントの解説（必須）
 

@@ -1,0 +1,26 @@
+<mxfile host="Electron" modified="2026-03-26T00:00:00.000Z" type="device">
+  <diagram id="diagram-aws-1" name="AWS Architecture">
+    <mxGraphModel dx="1024" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="region-1" value="AWS Region" style="rounded=1;whiteSpace=wrap;html=1;arcSize=0;strokeColor=#545B64;fillColor=#FFFFFF;dashed=0;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=14;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1200" height="700" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="vpc-1" value="VPC" style="rounded=1;whiteSpace=wrap;html=1;arcSize=0;strokeColor=#FF9900;fillColor=none;dashed=1;dashPattern=8 4;verticalAlign=top;align=left;spacingLeft=10;fontStyle=1;fontSize=12;fontColor=#FF9900;" vertex="1" parent="region-1">
+          <mxGeometry x="20" y="40" width="860" height="640" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="subnet-public-1" value="Public Subnet" style="rounded=1;whiteSpace=wrap;html=1;arcSize=0;strokeColor=#FF9900;fillColor=none;dashed=1;dashPattern=8 4;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontColor=#FF9900;" vertex="1" parent="vpc-1">
+          <mxGeometry x="20" y="40" width="820" height="200" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="subnet-private-1" value="Private Subnet" style="rounded=1;whiteSpace=wrap;html=1;arcSize=0;strokeColor=#FF9900;fillColor=none;dashed=1;dashPattern=8 4;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fontColor=#FF9900;" vertex="1" parent="vpc-1">
+          <mxGeometry x="20" y="270" width="820" height="330" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

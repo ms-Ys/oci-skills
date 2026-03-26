@@ -123,7 +123,7 @@ install_skill() {
     if [[ -f "${dest_dir}/setup.sh" ]]; then
         echo
         warn "This skill has a setup script. Run it to download required assets:"
-        echo -e "  ${CYAN}cd ${dest_dir} && bash setup.sh${NC}"
+        echo -e "  ${CYAN}cd ${dest_dir} && bash setup.sh --provider all${NC}"
     fi
 
     echo
